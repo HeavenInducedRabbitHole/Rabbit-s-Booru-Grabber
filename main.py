@@ -72,16 +72,16 @@ def download_images_gui():
     root = tk.Tk()
     root.withdraw()  # Hides that odd fucking blank window, seriously tf.gg
 
-    # Create dialog window
+    
     dialog = tk.Toplevel(root)
     dialog.title("Rabbit's Booru Grabber")
 
-    # Use transparent image as icon
+    
     icon_path = os.path.join(os.path.dirname(__file__), "icon.png")
     if os.path.exists(icon_path):
         dialog.iconphoto(True, tk.PhotoImage(file=icon_path))
 
-    # Tag input
+    
     tag_label = tk.Label(dialog, text="Tag:")
     tag_label.grid(row=0, column=0, padx=5, pady=5)
     tag_entry = tk.Entry(dialog)
@@ -93,7 +93,7 @@ def download_images_gui():
     num_images_entry = tk.Entry(dialog)
     num_images_entry.grid(row=1, column=1, padx=5, pady=5)
 
-    # Save directory selection
+    
     def select_directory():
         save_directory = filedialog.askdirectory(title="Save Directory")
         directory_var.set(save_directory)
@@ -126,7 +126,7 @@ def download_images_gui():
         tag = tag_entry.get()
         num_images = int(num_images_entry.get())
         save_directory = directory_var.get()
-        exclude_tags = exclude_tags_entry.get().split(",")  # Split comma-separated tags
+        exclude_tags = exclude_tags_entry.get().split(",") if exclude_tags_entry.get() else None  # Split comma-separated tags if provided
 
         if tag and num_images and save_directory:
             try:
@@ -140,7 +140,7 @@ def download_images_gui():
     download_button = tk.Button(dialog, text="Download", command=start_download)
     download_button.grid(row=6, column=0, columnspan=3, padx=5, pady=10)
 
-    # Additional label for instructions
+   
     instruction_label = tk.Label(dialog, text="Enter tag and number of images to grab stuff from booru sites.")
     instruction_label.grid(row=7, column=0, columnspan=3, padx=5, pady=5)
 
